@@ -7,5 +7,5 @@ tasks:
 #    command: yarn build
 # Ports to expose on workspace startup (optional)
 ports:
-#  - port: 8000
+  - port: 8000
 #    onOpen: open-preview
