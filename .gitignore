@@ -2,6 +2,11 @@
 /cache/
 /lib/
 /uploads/
+/storage/log
+/storage/session
+/log
+
+desktop.ini
 
 # IDE Fluff
 .settings
@@ -10,6 +15,8 @@
 .metadata
 .phpintel
 nbproject/
+.vscode/
+.vs/
 
 # Composer
 /composer/
@@ -17,3 +24,9 @@ nbproject/
 composer.json
 composer.lock
 system
+/test/Codeception
+/test/Services/chromedriver
+
+codeception.yml
+
+test/Services/chromedriver

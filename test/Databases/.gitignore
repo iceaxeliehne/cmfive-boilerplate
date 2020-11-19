@@ -1,0 +1,5 @@
+
+*.sql
+*/
+config.php
+!.gitignore

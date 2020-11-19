@@ -3,7 +3,9 @@ php:
   - '7.0'
   - '7.1'
 env:
-  - DB = mysql
+
+  - DB=mysql DB_HOST=localhost DB_USERNAME=root DB_PASSWORD='' DB_DATABASE=cmfive
+
 
 addons:
   hosts:
@@ -12,9 +14,11 @@ addons:
 sudo:
   - required
 
+
 before_script:
   - mysql -e 'create database cmfive;'
   - cp config.php.example config.php
+
   - sed -i 's/<username>/travis/' config.php
   - sed -i 's/<password>//' config.php
   - sed -i 's/<database>/cmfive/' config.php
@@ -26,3 +30,4 @@ before_script:
 script:
   - bash install-dependancies.sh
    
+

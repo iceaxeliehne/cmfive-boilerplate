@@ -18,11 +18,11 @@ Config::set("system.timezone", "Australia/Sydney");
 //========== Database Configuration ==========================
 
 Config::set("database", array(
-    "hostname"  => "localhost",
-    "username"  => "<username>",
-    "password"  => "<password>",
-    "database"  => "<database>",
-    "driver"    => "mysql"
+    "hostname"  => getenv('DB_HOST') ? : "localhost",
+    "username"  => getenv('DB_USERNAME') ? : "<username>",
+    "password"  => getenv('DB_PASSWORD') ? : "<password>",
+    "database"  => getenv('DB_DATABASE') ? : "<database>",
+    "driver"    => getenv('DB') ? : "mysql"
 ));
 
 //=========== Email Layer Configuration =====================
@@ -36,6 +36,18 @@ Config::append('email', array(
     "username"	=> '<email>',
     "password"	=> '<password>',
 ));
+
+//========== TestRunner Configuration ==========================
+//========== must be "ENABLED" to run ==========================
+Config::set("tests", array(
+    "testrunner"  => ""
+));
+
+//======= define openssl encryption key and initialization vector ============
+Config::set('system.encryption', [
+    'key' => '',
+    'iv'  => ''
+]);
 
 //========= Anonymous Access ================================
 
