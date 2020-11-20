@@ -1,5 +1,10 @@
 FROM gitpod/workspace-mysql
 
+RUN sudo apt-get purge php7.* \
+    && sudo apt-get autoclean \
+    && sudo apt-get autoremove \
+    && sudo apt-get install -yq php7.3 
+
 RUN sudo apt-get update -q \
     && sudo apt-get install -y php-dev
 
