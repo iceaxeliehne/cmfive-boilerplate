@@ -46,9 +46,9 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     phpunit \
     php-xdebug
     
-RUN a2dismod php7.4 \
-    && a2enmod php7.2 \
-    && update-alternatives --set php /usr/bin/php7.2
+RUN sudo a2dismod php7.4 \
+    && sudo a2enmod php7.2 \
+    && sudo update-alternatives --set php /usr/bin/php7.2
 
 # bootstrap environment
 #WORKDIR /bootstrap
