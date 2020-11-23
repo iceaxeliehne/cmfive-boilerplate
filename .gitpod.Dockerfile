@@ -5,6 +5,8 @@ ENV APACHE_DOCROOT_IN_REPO=""
 # prevent install locking up o TZ or other user inputs
 ENV DEBIAN_FRONTEND=noninteractive
 
+USER root
+
 # set up basics for apt-get'ting
 RUN apt-get update
 RUN apt-get install -y software-properties-common
