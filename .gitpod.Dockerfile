@@ -46,6 +46,8 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     phpunit \
     php-xdebug
     
+    
+USER root    
 RUN sudo a2dismod php7.4 \
     && sudo a2enmod php7.2 \
     && sudo update-alternatives --set php /usr/bin/php7.2
