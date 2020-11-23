@@ -49,9 +49,9 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     
 USER root    
 
-RUN a2dismod php7.4 \
-    && a2enmod php7.2 \
-    && sudo update-alternatives --set php /usr/bin/php7.2
+RUN a2dismod php7.4 
+RUN a2enmod php7.2 
+RUN update-alternatives --set php /usr/bin/php7.2
 
 # bootstrap environment
 #WORKDIR /bootstrap
