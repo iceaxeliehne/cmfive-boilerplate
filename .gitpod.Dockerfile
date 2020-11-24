@@ -40,7 +40,7 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     git \
     iputils-ping \
     curl \
-    mysql-client-5.7
+    default-mysql-client
 
 # PHP extras, for test+debug
 RUN apt-get update
