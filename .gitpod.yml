@@ -22,3 +22,11 @@ tasks:
         ENV APACHE_DOCROOT_IN_REPO=""
         apachectl start;
         multitail /var/log/apache2/error.log -I /var/log/apache2/access.log
+
+
+# mysql commands to setup database
+# 1. "create database cmfive;"
+# 2. "CREATE USER 'cmfive'@'localhost' IDENTIFIED BY 'cmfive';"
+# 3. "GRANT ALL PRIVILEGES ON cmfive . * TO 'cmfive'@'localhost';"
+# 4. "FLUSH PRIVILEGES;"
+
