@@ -26,7 +26,29 @@ tasks:
 
 # mysql commands to setup database
 # 1. "create database cmfive;"
-# 2. "CREATE USER 'cmfive'@'localhost' IDENTIFIED BY 'cmfive';"
+# 2. "CREATE USER 'cmfive'@'localhost' IDENTIFIED WITH mysql_native_password BY 'cmfive';"
 # 3. "GRANT ALL PRIVILEGES ON cmfive . * TO 'cmfive'@'localhost';"
 # 4. "FLUSH PRIVILEGES;"
+
+# duplicate config.php.example and rename
+
+# replace relevent database config items with
+#     "username"  => getenv('DB_USERNAME') ? : "cmfive",
+#     "password"  => getenv('DB_PASSWORD') ? : "cmfive",
+#     "database"  => getenv('DB_DATABASE') ? : "cmfive",
+
+# remove this from config.php
+# Config::set('system.encryption', [
+#     'key' => '',
+#     'iv'  => ''
+# ]);
+
+# terminal commands to serve site
+# 1. "apachectl restart"
+
+# run 
+# "php cmfive.php"
+# choose 1
+# choose 4
+# choose 2 then 3
 
