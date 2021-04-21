@@ -22,10 +22,12 @@ RUN apt-get autoclean -y
 
 RUN apt-get dist-upgrade
 
-RUN cd /tmp
-RUN curl -OL https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb
-RUN dpkg -i mysql-apt-config_0.8.13-1_all.deb
+# RUN cd /tmp
+# RUN curl -OL https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb
+# RUN dpkg -i mysql-apt-config_0.8.13-1_all.deb
 
+RUN wget https://dev.mysql.com/get/mysql-apt-config_0.8.15-1_all.deb
+RUN dpkg -i mysql-apt-config_0.8.15-1_all.deb
 
 RUN rm -rf /etc/mysql
 RUN rm -rf /var/lib/mysql*
@@ -35,7 +37,7 @@ RUN apt-get update
 RUN apt-cache policy mysql-server
 
 #RUN apt-get install -f mysql-client=5.7.33-1ubuntu18.04 mysql-community-server=5.7.33-1ubuntu18.04 mysql-server=5.7.33-1ubuntu18.04
-RUN apt-get install -f mysql-client=5.7.*-1ubuntu18.04 mysql-community-server=5.7.*-1ubuntu18.04 mysql-server=5.7.*-1ubuntu18.04
+RUN apt-get install -f mysql-client mysql-community-server mysql-server
 
 
 # set up basics for apt-get'ting
