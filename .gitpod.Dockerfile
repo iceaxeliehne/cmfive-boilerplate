@@ -56,7 +56,7 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     php7.2-fpm
 
 RUN apt-get update
-RUN apt-get install -y -o "APT::Acquire::Retries=6" Dpkg::Options::="--force-confnew" \
+RUN apt-get install -y -o "APT::Acquire::Retries=6"  \
     php7.2-zip \
     php7.2-curl \
     php7.2-gd \
@@ -64,7 +64,11 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" Dpkg::Options::="--force-con
     php7.2-mysql \
     php7.2-xml \
     php7.2-bcmath \
-    php7.2-mbstring  \
+    php7.2-mbstring  
+
+
+# RUN apt-get install -y  -o Dpkg::Options::="--force-confold" "APT::Acquire::Retries=6" \
+RUN apt-get install -y  -o Dpkg::Options::="--force-confold" \
     libapache2-mod-php7.2
 
 # toolbox extras, to allow for DB commands & subnet examination etc
@@ -83,9 +87,7 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     
 # RUN a2dismod mpm_prefork
 
-# RUN apt-get install -y  -o Dpkg::Options::="--force-confold" "APT::Acquire::Retries=6" \
-RUN apt-get install -y  -o Dpkg::Options::="--force-confold" \
-    libapache2-mod-php7.2
+
 
 USER root    
 
