@@ -10,12 +10,12 @@ USER root
 # set up mysql 5.7
 RUN service mysql stop
 
-RUN apt-get remove --purge mysql* 
+RUN apt-get remove --purge mysql* -y
 #sudo apt-get purge mysql*
 #sudo apt autoremove && sudo apt autoclean
 #sudo apt-get remove dbconfig-mysql
 
-RUN apt-get purge mysql*
+RUN apt-get purge mysql* -y
 RUN apt-get autoremove
 RUN apt-get autoclean
 RUN apt-get remove dbconfig-mysql
