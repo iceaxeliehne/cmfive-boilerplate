@@ -7,6 +7,19 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
 
+# set up mysql 5.7
+RUN apt-get purge mysql*
+RUN apt-get autoremove
+RUN apt-get autoclean
+
+RUN apt-get dist-upgrade
+
+RUN rm -rf /etc/mysql
+RUN rm -rf /var/lib/mysql*
+
+RUN apt install -f mysql-client=5.7.33-1ubuntu18.04 mysql-community-server=5.7.33-1ubuntu18.04 mysql-server=5.7.33-1ubuntu18.04
+
+
 # set up basics for apt-get'ting
 RUN apt-get update
 RUN apt-get install -y software-properties-common
