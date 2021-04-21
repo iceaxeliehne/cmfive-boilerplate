@@ -82,7 +82,8 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     php-xdebug
     
     
-RUN apt-get install -y  -o Dpkg::Options::="--force-confold" "APT::Acquire::Retries=6" \
+# RUN apt-get install -y  -o Dpkg::Options::="--force-confold" "APT::Acquire::Retries=6" \
+RUN apt-get install -y  -o Dpkg::Options::="--force-confold" \
     libapache2-mod-php7.2
 
 USER root    
