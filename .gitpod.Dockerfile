@@ -34,7 +34,8 @@ RUN apt-get update
 
 RUN apt-cache policy mysql-server
 
-RUN apt install -f mysql-client=5.7.33-1ubuntu18.04 mysql-community-server=5.7.33-1ubuntu18.04 mysql-server=5.7.33-1ubuntu18.04
+#RUN apt-get install -f mysql-client=5.7.33-1ubuntu18.04 mysql-community-server=5.7.33-1ubuntu18.04 mysql-server=5.7.33-1ubuntu18.04
+RUN apt-get install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
 
 
 # set up basics for apt-get'ting
