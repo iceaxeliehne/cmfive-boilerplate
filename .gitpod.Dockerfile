@@ -48,8 +48,8 @@ RUN apt-get install -y locales-all
 
 # allow retries & break up apt-get for recovery
 # of build from apt cache in case of connection failures
-            # RUN apt-get install -y -o "APT::Acquire::Retries=6" \
-            #     vim supervisor nginx gnupg2	
+RUN apt-get install -y -o "APT::Acquire::Retries=6" \
+    vim supervisor gnupg2	
 
 RUN apt-get update
 RUN apt-get install -y -o "APT::Acquire::Retries=6" \
@@ -81,8 +81,7 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     phpunit \
     php-xdebug
     
-RUN apt-get remove --purge libapache2-mod-php7.2 -y
-
+    
 RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     libapache2-mod-php7.2
 
