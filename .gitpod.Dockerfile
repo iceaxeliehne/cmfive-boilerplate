@@ -64,8 +64,8 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     php7.2-mysql \
     php7.2-xml \
     php7.2-bcmath \
-    php7.2-mbstring \ 
-    libapache2-mod-php7.2
+    php7.2-mbstring   
+    # libapache2-mod-php7.2
 
 # toolbox extras, to allow for DB commands & subnet examination etc
 RUN apt-get update
