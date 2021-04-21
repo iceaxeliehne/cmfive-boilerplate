@@ -16,9 +16,9 @@ RUN apt-get remove --purge mysql* -y
 #sudo apt-get remove dbconfig-mysql
 
 RUN apt-get purge mysql* -y
-RUN apt-get autoremove
-RUN apt-get autoclean
-RUN apt-get remove dbconfig-mysql
+RUN apt-get autoremove -y
+RUN apt-get autoclean -y
+RUN apt-get remove dbconfig-mysql -y
 
 RUN apt-get dist-upgrade
 
