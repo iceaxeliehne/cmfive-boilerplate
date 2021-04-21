@@ -81,8 +81,11 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     phpunit \
     php-xdebug
     
-    
+RUN apt-get install -y -o "APT::Acquire::Retries=6" \
+    apache2 \
+    libapache2-mod-php7.2
 USER root    
+
 
 RUN a2dismod php7.4 
 RUN a2enmod php7.2 
