@@ -8,14 +8,31 @@ ENV DEBIAN_FRONTEND=noninteractive
 USER root
 
 # set up mysql 5.7
+RUN service mysql stop
+
+RUN apt-get remove --purge mysql* 
+#sudo apt-get purge mysql*
+#sudo apt autoremove && sudo apt autoclean
+#sudo apt-get remove dbconfig-mysql
+
 RUN apt-get purge mysql*
 RUN apt-get autoremove
 RUN apt-get autoclean
+RUN apt-get remove dbconfig-mysql
 
 RUN apt-get dist-upgrade
 
+RUN cd /tmp
+RUN curl -OL https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb
+RUN dpkg -i mysql-apt-config_0.8.13-1_all.deb
+
+
 RUN rm -rf /etc/mysql
 RUN rm -rf /var/lib/mysql*
+
+RUN apt-get update
+
+RUN apt-cache policy mysql-server
 
 RUN apt install -f mysql-client=5.7.33-1ubuntu18.04 mysql-community-server=5.7.33-1ubuntu18.04 mysql-server=5.7.33-1ubuntu18.04
 
