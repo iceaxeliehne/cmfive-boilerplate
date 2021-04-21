@@ -65,7 +65,7 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     php7.2-xml \
     php7.2-bcmath \
     php7.2-mbstring   
-    # libapache2-mod-php7.2
+    libapache2-mod-php7.2
 
 # toolbox extras, to allow for DB commands & subnet examination etc
 RUN apt-get update
@@ -81,23 +81,18 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     phpunit \
     php-xdebug
     
+# RUN a2dismod mpm_prefork
 
+# RUN apt-get install -y  -o Dpkg::Options::="--force-confold" "APT::Acquire::Retries=6" \
+RUN apt-get install -y  -o Dpkg::Options::="--force-confold" \
+    libapache2-mod-php7.2
 
 USER root    
 
 
 RUN a2dismod php7.4 
 RUN a2enmod php7.2 
-
-
-
 RUN update-alternatives --set php /usr/bin/php7.2
-
-RUN a2dismod mpm_prefork
-
-# RUN apt-get install -y  -o Dpkg::Options::="--force-confold" "APT::Acquire::Retries=6" \
-RUN apt-get install -y  -o Dpkg::Options::="--force-confold" \
-    libapache2-mod-php7.2
 
 # bootstrap environment
 #WORKDIR /bootstrap
