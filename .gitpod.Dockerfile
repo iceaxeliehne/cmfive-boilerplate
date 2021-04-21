@@ -81,18 +81,23 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     phpunit \
     php-xdebug
     
-RUN a2dismod mpm_prefork
 
-# RUN apt-get install -y  -o Dpkg::Options::="--force-confold" "APT::Acquire::Retries=6" \
-RUN apt-get install -y  -o Dpkg::Options::="--force-confold" \
-    libapache2-mod-php7.2
 
 USER root    
 
 
 RUN a2dismod php7.4 
 RUN a2enmod php7.2 
+
+
+
 RUN update-alternatives --set php /usr/bin/php7.2
+
+RUN a2dismod mpm_prefork
+
+# RUN apt-get install -y  -o Dpkg::Options::="--force-confold" "APT::Acquire::Retries=6" \
+RUN apt-get install -y  -o Dpkg::Options::="--force-confold" \
+    libapache2-mod-php7.2
 
 # bootstrap environment
 #WORKDIR /bootstrap
