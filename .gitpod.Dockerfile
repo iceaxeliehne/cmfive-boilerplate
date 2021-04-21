@@ -72,8 +72,8 @@ RUN apt-get update
 RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     git \
     iputils-ping \
-    curl \
-    default-mysql-client
+    curl 
+    # default-mysql-client
 
 # PHP extras, for test+debug
 RUN apt-get update
