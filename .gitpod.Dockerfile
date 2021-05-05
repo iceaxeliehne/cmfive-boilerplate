@@ -1,5 +1,5 @@
-FROM gitpod/workspace-mysql
-#FROM gitpod/workspace-full:latest
+#FROM gitpod/workspace-mysql
+FROM gitpod/workspace-full:latest
 
 
 
@@ -15,7 +15,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 USER root
 
 # set up mysql 5.7
-RUN service mysql stop
+###RUN service mysql stop
 
 RUN apt-get remove --purge mysql* -y
 #sudo apt-get purge mysql*
