@@ -93,11 +93,14 @@ USER root
 
 
 RUN a2dismod php7.4 
-RUN a2enmod php7.2 
-RUN update-alternatives --set php /usr/bin/php7.2
 
 RUN apt-get install -y  -o Dpkg::Options::="--force-confnew" \
     libapache2-mod-php7.2
+
+RUN a2enmod php7.2 
+RUN update-alternatives --set php /usr/bin/php7.2
+
+
 
 # bootstrap environment
 #WORKDIR /bootstrap
