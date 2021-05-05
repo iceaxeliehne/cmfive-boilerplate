@@ -70,6 +70,7 @@ RUN a2dismod php7.4
 
 RUN apt-get update
 RUN apt-get install -y -o "APT::Acquire::Retries=6"  \
+    apache2 \
     php7.2-zip \
     php7.2-curl \
     php7.2-gd \
