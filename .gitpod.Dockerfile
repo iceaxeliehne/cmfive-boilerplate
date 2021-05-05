@@ -50,7 +50,7 @@ RUN apt-get install -f mysql-client mysql-community-server mysql-server -y
 # set up basics for apt-get'ting
 RUN apt-get update
 RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:ondrej/php
+###RUN add-apt-repository ppa:ondrej/php
 RUN apt-get install -y locales-all
 
 # allow retries & break up apt-get for recovery
