@@ -27,7 +27,7 @@ RUN apt-get autoremove -y
 RUN apt-get autoclean -y
 #RUN apt-get remove dbconfig-mysql -y
 
-RUN apt-get dist-upgrade
+###RUN apt-get dist-upgrade
 
 # RUN cd /tmp
 # RUN curl -OL https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb
