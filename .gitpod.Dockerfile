@@ -28,7 +28,8 @@ RUN apt-get autoclean -y
 
 ###RUN apt-get dist-upgrade
 
-RUN apt-get install -y apt-utils
+RUN apt-get update
+RUN apt-get install -y --fix-missing apt-utils
 
 
 # RUN cd /tmp
