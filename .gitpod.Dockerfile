@@ -7,7 +7,7 @@ FROM gitpod/workspace-full:latest
 ENV APACHE_DOCROOT_IN_REPO=""
 
 # optional: use a custom apache config.
-COPY apache.conf /etc/apache2/apache2.conf
+COPY ./apache/apache.conf /etc/apache2/apache2.conf
 
 # prevent install locking up o TZ or other user inputs
 ENV DEBIAN_FRONTEND=noninteractive
