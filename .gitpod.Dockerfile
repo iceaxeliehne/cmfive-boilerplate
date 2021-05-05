@@ -1,8 +1,6 @@
 #FROM gitpod/workspace-mysql
 FROM gitpod/workspace-full:latest
 
-
-
 # optional: change document root folder. It's relative to your git working copy.
 ENV APACHE_DOCROOT_IN_REPO=""
 
@@ -30,7 +28,7 @@ RUN apt-get autoclean -y
 
 ###RUN apt-get dist-upgrade
 
-#RUN apt-get install -y --no-install-recommends apt-utils
+RUN apt-get install -y apt-utils
 
 
 # RUN cd /tmp
