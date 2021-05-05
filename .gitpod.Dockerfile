@@ -1,5 +1,5 @@
-#FROM gitpod/workspace-mysql
-FROM gitpod/workspace-full:latest
+FROM gitpod/workspace-mysql
+#FROM gitpod/workspace-full:latest
 
 
 
