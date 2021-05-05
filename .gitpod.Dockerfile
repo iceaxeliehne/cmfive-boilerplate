@@ -14,7 +14,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
 
-RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 
 # set up mysql 5.7
 ###RUN service mysql stop
@@ -30,6 +29,9 @@ RUN apt-get autoclean -y
 #RUN apt-get remove dbconfig-mysql -y
 
 ###RUN apt-get dist-upgrade
+
+RUN apt-get install -y --no-install-recommends apt-utils
+
 
 # RUN cd /tmp
 # RUN curl -OL https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb
