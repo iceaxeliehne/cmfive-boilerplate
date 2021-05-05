@@ -54,6 +54,9 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
 RUN apt-get update
 RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     php7.2-fpm
+    
+
+RUN a2dismod php7.4 
 
 RUN apt-get update
 RUN apt-get install -y -o "APT::Acquire::Retries=6"  \
@@ -64,7 +67,8 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6"  \
     php7.2-mysql \
     php7.2-xml \
     php7.2-bcmath \
-    php7.2-mbstring  
+    php7.2-mbstring \
+    libapache2-mod-php7.2
 
 # RUN a2dismod mpm_prefork
 # # RUN apt-get install -y  -o Dpkg::Options::="--force-confold" "APT::Acquire::Retries=6" \
@@ -92,10 +96,10 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
 USER root    
 
 
-RUN a2dismod php7.4 
+#RUN a2dismod php7.4 
 
-RUN apt-get install -y  -o Dpkg::Options::="--force-confnew" \
-    libapache2-mod-php7.2
+#RUN apt-get install -y  -o Dpkg::Options::="--force-confnew" \
+#    libapache2-mod-php7.2
 
 RUN a2enmod php7.2 
 RUN update-alternatives --set php /usr/bin/php7.2
