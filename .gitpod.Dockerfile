@@ -30,7 +30,7 @@ RUN apt-get autoclean -y
 
 ###RUN apt-get dist-upgrade
 
-RUN apt-get install -y --no-install-recommends apt-utils
+#RUN apt-get install -y --no-install-recommends apt-utils
 
 
 # RUN cd /tmp
