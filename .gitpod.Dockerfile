@@ -31,6 +31,8 @@ RUN apt-get autoclean -y
 RUN apt-get update
 RUN apt-get install -y --fix-missing apt-utils
 
+RUN apt-get install -y apache2 
+RUN service apachectl restart
 
 # RUN cd /tmp
 # RUN curl -OL https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb
@@ -70,7 +72,6 @@ RUN a2dismod php7.4
 
 RUN apt-get update
 RUN apt-get install -y -o "APT::Acquire::Retries=6"  \
-    apache2 \
     php7.2-zip \
     php7.2-curl \
     php7.2-gd \
