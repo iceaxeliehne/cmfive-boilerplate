@@ -14,6 +14,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
 
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
+
 # set up mysql 5.7
 ###RUN service mysql stop
 
