@@ -5,7 +5,7 @@ use Symfony\Component\Yaml\Yaml;
 
 if (!(isset($argc) && isset($argv))) {
     echo "No action is possible.";
-    exit();
+    exit(1);
 }
 
 defined('DS') || define('DS', DIRECTORY_SEPARATOR);
@@ -138,47 +138,71 @@ function offerMenuTests()
 
 function moduleRunner($runModule, $silent = false)
 {
-
     unitRunner($runModule);
     purgeTestCode();
     registerConfig();
     $found = chaseModules("all");
     registerHelpers($found);
-    //$silent = false;
+
+    $module_found = false;
 
     foreach ($found as $capabilities => $capability) {
-        if ($capabilities == "Tests") {
-            foreach ($capability as $module => $resources) {
-                if ($module == $runModule) {
-                    foreach ($resources as $resource) {
-                        $codeCeptCommand = DEBUG_RUN . "  " . $resource;
-                        $packBar = "\nO" . str_repeat("-", strlen($codeCeptCommand) + 2) . "O\n";
-                        echo $packBar . "| " . $codeCeptCommand . " |" . $packBar;
-                        $silent = launchCodecept($codeCeptCommand, $silent);
-                    }
-                }
+        if ($capabilities !== "Tests") {
+            continue;
+        }
+
+        foreach ($capability as $module => $resources) {
+            if ($module !== $runModule) {
+                continue;
+            }
+
+            $module_found = true;
+
+            foreach ($resources as $resource) {
+                $codeCeptCommand = DEBUG_RUN . "  " . $resource;
+                $packBar = "\nO" . str_repeat("-", strlen($codeCeptCommand) + 2) . "O\n";
+                echo $packBar . "| " . $codeCeptCommand . " |" . $packBar;
+                $silent = launchCodecept($codeCeptCommand, $silent);
             }
         }
+    }
+
+    if (!$module_found) {
+        echo "Error: Unable to find $runModule module\n";
+        exit(1);
     }
 }
 
 
-function unitRunner($runModule)
+function unitRunner($run_module)
 {
     purgeTestCode();
-    $runModule = ltrim($runModule);
-    $runModule = empty($runModule) ? "all" : $runModule;
-    $found = chaseModules($runModule);
+    $run_module = ltrim($run_module);
+    $run_module = empty($run_module) ? "all" : $run_module;
+    $found = chaseModules($run_module);
 
     foreach ($found as $capabilities => $capability) {
         if ($capabilities == "UnitTests") {
             foreach ($capability as $module => $resources) {
-                if ($module == $runModule || $runModule == "all") {
+                if ($module == $run_module || $run_module == "all") {
                     foreach ($resources as $resource) {
-                        $unitTestCommand = PHPUNIT_RUN . "  " . UNIT_DESTINATION . DS . $resource . " ";
-                        $packBar = "\nO" . str_repeat("-", strlen($unitTestCommand) + 2) . "O\n";
-                        echo $packBar . "| " . $unitTestCommand . " |" . $packBar;
-                        launchUnitTest($unitTestCommand);
+                        $file_name = PHPUNIT_RUN . "  " . UNIT_DESTINATION . DS . $resource . " ";
+                        $output = [];
+                        $status_code = 0;
+
+                        // Execute unit test, saving the output and status code.
+                        executeUnitTest($file_name, $output, $status_code);
+
+                        // If we received a non-zero status code, the test failed. Print the output to console.
+                        if ($status_code !== 0) {
+                            $file_name = PHPUNIT_RUN . "  " . UNIT_DESTINATION . DS . $resource . " ";
+                            $packBar = "\n*" . str_repeat("-", strlen($file_name) + 11) . "*\n";
+                            echo $packBar . "| " . "\e[31m" . $file_name . " \e[39m| \e[31mFAILED \e[39m|" . $packBar;
+
+                            foreach ($output as $o) {
+                                echo "\e[31m$o\n\e[39m";
+                            }
+                        }
                     }
                 }
             }
@@ -354,22 +378,35 @@ function launchCodecept($param, $silent = false)
     if ($OK == "OK") {
         try {
             $runner = "cd " . TEST_DIRECTORY . " && vendor" . DS . "bin" . DS . "codecept " . $param;
-            echo shell_exec($runner);
+            $output = [];
+            $return_code = 0;
+            exec($runner, $output, $return_code);
+            echo implode("\n", $output) . "\n";
+            if ($return_code > 0) {
+                exit($return_code);
+            }
         } catch (Exception $e) {
             echo $e->getMessage();
+            exit(1);
         }
     }
 
     return $silent;
 }
 
-
-function launchUnitTest($param)
+/**
+ * Calls exec on the $file_name parameter, and passes the $output and $status_code
+ * parameters back as references.
+ *
+ * @param string $file_name
+ * @param array<string>|null $output
+ * @param string $status_code
+ * @return void
+ */
+function executeUnitTest(string $file_name, ?array &$output, string &$status_code): void
 {
     try {
-        $runner = "cd " . ROOT_PATH . " && phpunit " . $param;
-        echo $runner;
-        echo shell_exec($runner);
+        exec("cd " . ROOT_PATH . " && phpunit " . $file_name, $output, $status_code);
     } catch (Exception $e) {
         echo $e->getMessage();
     }

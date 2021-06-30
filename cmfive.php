@@ -1,7 +1,6 @@
 #!/bin/php
 <?php
 
-
 if (!(isset($argc) && isset($argv))) {
     echo "No action is possible.";
     exit();
@@ -336,7 +335,8 @@ function sketchComposerForCore($reference)
         "version": "1.0",
         "description": "A boilerplate project layout for Cmfive",
         "require": {
-            "2pisoftware/cmfive-core": "dev-$reference"
+            "2pisoftware/cmfive-core": "dev-$reference",
+            "aws/aws-sdk-php": "^3.24"
         },
         "config": {
             "vendor-dir": "composer/vendor",
@@ -363,7 +363,7 @@ COMPOSER;
     return json_decode($composer_string, true);
 }
 
-function installThirdPartyLibraries($composer_json = null)
+function installThirdPartyLibraries(array $composer_json)
 {
     if (!stepOneYieldsWeb()) {
         return false;
@@ -376,10 +376,6 @@ function installThirdPartyLibraries($composer_json = null)
     }
 
     $w = new Web();
-
-    if (!$composer_json) {
-        $composer_json = sketchComposerForCore();
-    }
 
     $dependencies_array = [];
     foreach ($w->modules() as $module) {
@@ -478,6 +474,10 @@ function seedAdminUser($parameters = [])
 
 function generateEncryptionKeys()
 {
+    if (!stepOneYieldsWeb()) {
+        return false;
+    }
+
     if (!empty(Config::get("system.encryption"))) {
         echo "\nOrder of steps is important - KEY ALREADY EXISTS";
         echo "\nSetup will not create multiple encryption keys\n\n";
@@ -497,6 +497,7 @@ function generateEncryptionKeys()
 
     $key_token = bin2hex($key_token);
 
+
     echo "Encryption key generated\n";
     file_put_contents('config.php', "\nConfig::set('system.encryption', [\n\t'key' => '{$key_token}'\n]);", FILE_APPEND);
     echo "Key written to project config\n\n";
@@ -515,4 +516,3 @@ function readConsoleLine($prompt = "Command: ")
 
     return $command;
 }
-
