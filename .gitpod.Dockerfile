@@ -48,8 +48,8 @@ RUN apt-get update
 
 RUN apt-cache policy mysql-server
 
-#RUN apt-get install -f mysql-client=5.7.33-1ubuntu18.04 mysql-community-server=5.7.33-1ubuntu18.04 mysql-server=5.7.33-1ubuntu18.04
-RUN apt-get install -f mysql-client mysql-community-server mysql-server -y
+RUN apt-get install -f mysql-client=5.7.33-1ubuntu18.04 mysql-community-server=5.7.33-1ubuntu18.04 mysql-server=5.7.33-1ubuntu18.04
+#RUN apt-get install -f mysql-client mysql-community-server mysql-server -y
 
 
 # set up basics for apt-get'ting
@@ -64,23 +64,23 @@ RUN apt-get install -y -o "APT::Acquire::Retries=6" \
     vim supervisor gnupg2	
 
 RUN apt-get update
-RUN apt-get install -y -o "APT::Acquire::Retries=6" \
-    php7.2-fpm
+#RUN apt-get install -y -o "APT::Acquire::Retries=6" \
+#    php7.2-fpm
     
 
-RUN a2dismod php7.4 
+#RUN a2dismod php7.4 
 
 RUN apt-get update
-RUN apt-get install -y -o "APT::Acquire::Retries=6"  \
-    php7.2-zip \
-    php7.2-curl \
-    php7.2-gd \
-    php7.2-json \
-    php7.2-mysql \
-    php7.2-xml \
-    php7.2-bcmath \
-    php7.2-mbstring \
-    libapache2-mod-php7.2
+# RUN apt-get install -y -o "APT::Acquire::Retries=6"  \
+#     php7.2-zip \
+#     php7.2-curl \
+#     php7.2-gd \
+#     php7.2-json \
+#     php7.2-mysql \
+#     php7.2-xml \
+#     php7.2-bcmath \
+#     php7.2-mbstring \
+#     libapache2-mod-php7.2
 
 # RUN a2dismod mpm_prefork
 # # RUN apt-get install -y  -o Dpkg::Options::="--force-confold" "APT::Acquire::Retries=6" \
@@ -113,8 +113,8 @@ USER root
 #RUN apt-get install -y  -o Dpkg::Options::="--force-confnew" \
 #    libapache2-mod-php7.2
 
-RUN a2enmod php7.2 
-RUN update-alternatives --set php /usr/bin/php7.2
+# RUN a2enmod php7.2 
+# RUN update-alternatives --set php /usr/bin/php7.2
 
 
 
