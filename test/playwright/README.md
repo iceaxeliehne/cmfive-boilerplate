@@ -16,10 +16,10 @@
 - `cd cmfive-boilerplate`
 - `git switch feature/PlaywrightMigration`
 
-# Use the feature/FormBS5Conversion branch as the cmfive-core repo
+# Use the feature/AdminBS5Conversion branch as the cmfive-core repo
 
 - `cd ../cmfive-core`
-- `git switch feature/FormBS5Conversion`
+- `git switch feature/AdminBS5Conversion`
 
 # Ensure styles are compiled
 
@@ -37,26 +37,26 @@
 - `npm i`
 - `npx playwright install`
 - `npx playwright install-deps`
+- `sudo apt-get update`
+- `npx playwright install --force msedge`
+- `npx playwright install --force chrome`
 
 # Run Playwright Tests
 
 - cwd should be `cmfive-boilerplate/test/playwright/`
 - `npm run build`
 - `npm run test`
-- to run tests for a specific platform: `npx playwright test --project=[insert browser]`
-    - Example: `npx playwright test --project=chromium`
-- to run a specific test file: `npx playwright test --grep "[insert test file name]"`
+- if you're running consecutive test suite runs on the same system, make sure you run `bash bash cleanupTestMigrations.sh` and run command option `9` in the nginx shell cmfive menu (`php cmfive.php`) before each run to ensure the system is in a clean state for the next test suite run
+- to run tests for a specific platform: `npx playwright test --project="[insert browser]"`
+    - Example: `npx playwright test --project="chromium"`
+- to run a specific test file: `npx playwright test --grep="[insert test file name]"`
     - Examples:
-        - `npx playwright test --grep "admin"`,
-        - `npx playwright test --grep "admin.test"`,
-        - `npx playwright test --grep "admin.test.ts"`,
-    - you can also run tests where the test's description name (if present) matches the regex of `--grep "[regex here]"`; see: https://playwright.dev/docs/test-cli
+        - `npx playwright test --grep="admin"`,
+        - `npx playwright test --grep="admin.test"`,
+        - `npx playwright test --grep="admin.test.ts"`,
+    - you can also run tests where the test's description name (if present) matches the regex of `--grep="[regex here]"`; see: https://playwright.dev/docs/test-cli
     - to run run all tests EXCEPT those that match a given regex, use `--grep-invert` instead of `--grep`
 - you MUST run `npm run build` for your latest changes to test/test utils files to be made available for import (see "Setting up a new Playwright test for a module"), as well as for those changes to be present when running `npm run test`
-- before running Playwright tests, you should set up your Cmfive instance with an "Empty TestRunner DB and Administrator":
-    - Attach shell to cmfive's nginx container
-    - `php cmfive.php`
-    - Enter command option `9`
 
 # Setting up a new Playwright test for a module
 
