@@ -22,8 +22,10 @@
 - `git switch feature/PlaywrightMigration`
 
 # Setup playwright
-- `cd cmfive-boilerplate/test/playwright`
+
+- `cd test/playwright`
 - `npm run setup`
+- `nvm use 18`
 
 # Run Playwright Tests
 
@@ -36,7 +38,7 @@
         - `--module` (runs all tests for a module):
             - usage:
                 - `npm run test --module="Admin"`
-                - `npm run test --platform="Chromium" --module="Admin"`
+                - `npm run test --platform="Chromium" --module="Channels"`
 - after completing a test suite run, if you want to reuse the system for another test, you must run `npm run cleanup` before you run `npm run test` again
             
 

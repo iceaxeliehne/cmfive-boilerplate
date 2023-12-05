@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Load NVM into the script session
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 unset npm_config_prefix
