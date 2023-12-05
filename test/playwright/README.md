@@ -8,55 +8,37 @@
 
 # Download nvm
 
-- Grab the latest version of nvm from https://nvm.sh using the `curl` command
-- Close the current terminal after nvm is downloaded, and open a new terminal
-
-# Use the feature/PlaywrightMigration branch as the cmfive-boilerplate repo
-
-- `cd cmfive-boilerplate`
-- `git switch feature/PlaywrightMigration`
+- `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash`
+- (or go to [nvm's github](https://github.com/nvm-sh/nvm) and use the latest command found there)
 
 # Use the feature/AdminBS5Conversion branch as the cmfive-core repo
 
 - `cd ../cmfive-core`
 - `git switch feature/AdminBS5Conversion`
 
-# Ensure styles are compiled
+# Use the feature/PlaywrightMigration branch as the cmfive-boilerplate repo
 
-- `cd ../cmfive-core/system/templates/base`
-- `nvm install 14`
-- `nvm use 14`
-- `npm i`
-- `npm run dev`
+- `cd cmfive-boilerplate`
+- `git switch feature/PlaywrightMigration`
 
-# Setup Playwright
-
-- `cd ../../../../cmfive-boilerplate/test/playwright`
-- `nvm install 18`
-- `nvm use 18`
-- `npm i`
-- `npx playwright install`
-- `npx playwright install-deps`
-- `sudo apt-get update`
-- `npx playwright install --force msedge`
-- `npx playwright install --force chrome`
+# Setup playwright
+- `cd cmfive-boilerplate/test/playwright`
+- `npm run setup`
 
 # Run Playwright Tests
 
-- cwd should be `cmfive-boilerplate/test/playwright/`
 - `npm run build`
 - `npm run test`
-- if you're running consecutive test suite runs on the same system, make sure you run `bash bash cleanupTestMigrations.sh` and run command option `9` in the nginx shell cmfive menu (`php cmfive.php`) before each run to ensure the system is in a clean state for the next test suite run
-- to run tests for a specific platform: `npx playwright test --project="[insert browser]"`
-    - Example: `npx playwright test --project="chromium"`
-- to run a specific test file: `npx playwright test --grep="[insert test file name]"`
-    - Examples:
-        - `npx playwright test --grep="admin"`,
-        - `npx playwright test --grep="admin.test"`,
-        - `npx playwright test --grep="admin.test.ts"`,
-    - you can also run tests where the test's description name (if present) matches the regex of `--grep="[regex here]"`; see: https://playwright.dev/docs/test-cli
-    - to run run all tests EXCEPT those that match a given regex, use `--grep-invert` instead of `--grep`
-- you MUST run `npm run build` for your latest changes to test/test utils files to be made available for import (see "Setting up a new Playwright test for a module"), as well as for those changes to be present when running `npm run test`
+    - `npm run test` optional args:
+        - `--platform` (runs tests with the selected browser):
+            - usage:
+                - `npm run test --platform="Chromium"`
+        - `--module` (runs all tests for a module):
+            - usage:
+                - `npm run test --module="Admin"`
+                - `npm run test --platform="Chromium" --module="Admin"`
+- after completing a test suite run, if you want to reuse the system for another test, you must run `npm run cleanup` before you run `npm run test` again
+            
 
 # Setting up a new Playwright test for a module
 
